@@ -59,7 +59,7 @@ app.get("/urls/:id", (req, res) => {
 });
 
 app.get("/u/:id", (req, res) => {
-  const longURL = urlDatabase[req.params.id]; // const longURL = ...
+  const longURL = urlDatabase[req.params.id] // const longURL = ...
   res.redirect(longURL);
 });
 
@@ -68,8 +68,13 @@ app.post("/urls", (req, res) => {
   urlDatabase[urlID] = req.body.longURL;
   console.log(req.body); // Log the POST request body to the console
   res.redirect(`/urls/${urlID}`); //change to redirect by id// Respond with 'Ok' (we will replace this)
-
 });
+//remove the url when delete button click
+app.post("/urls/:id/delete", (req, res) => {
+const urlID = req.params.id
+  delete urlDatabase[urlID];
+  res.redirect("/urls")
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
