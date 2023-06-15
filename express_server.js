@@ -76,6 +76,14 @@ const urlID = req.params.id
   res.redirect("/urls")
 })
 
+//upload the url the user tpye 
+app.post("/urls/:id", (req, res) => {
+  const urlID = req.params.id
+  const newLongURL = req.body.longURL;
+  urlDatabase[urlID] = newLongURL;
+  res.redirect(`/urls`)
+})
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
