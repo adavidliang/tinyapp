@@ -17,12 +17,12 @@
       <div class="card-body">
         <h5 class="card-title">TinyURL for: <%= longURL %></h5>
         <p class="card-text">
-          Short URL ID: <a href="/u/<%= id %>"><%= id %></a>
+          Short URL ID: <a href="/u/<%= urlID %>"><%= urlID %></a>
         </p>
         <h3>Edit</h3>
-        <form action="/urls/<%= id%>" method="POST">
+        <form action="/urls/<%= urlID%>" method="POST">
         <h>new URL:</h>
-        <input type="text" name="longURL" value="<%= longURL %>">
+        <input type="text" name="longURL" value="<%= urlID %>" />
         <button type="sumbit" class="btn btn-primary">Submit</button>
       </form>
       </div>
