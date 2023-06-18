@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const app = express();
 const PORT = 8080; // default port 8080
 const cookieSession = require('cookie-session');
-const { getUserByEmail, isUserHasUrl, isLogin } = require("./helpers");
+const { getUserByEmail, isUserHasUrl, isLogin, generateRandomString } = require("./helpers");
 
 app.set("view engine", "ejs");
 //Middleware
@@ -17,18 +17,6 @@ app.use(cookieSession({
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));
-
-const generateRandomString = (length) => {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length;
-  let counter = 0;
-  while (counter < length) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    counter += 1;
-  }
-  return result;
-};
 
 //function
 const urlsForUser = (id) => {
