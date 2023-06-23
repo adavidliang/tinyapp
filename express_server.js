@@ -112,10 +112,10 @@ app.get("/urls/:id", (req, res) => {
 });
 
 app.get("/u/:id", (req, res) => {
-  const longURL = urlDatabase[req.params.id];
-  if (!longURL) {
+  if (!urlDatabase[req.params.id]) {
     return res.send("error, id not exist");
   }
+  const longURL = urlDatabase[req.params.id].longURL;
   res.redirect(longURL);
 });
 
@@ -192,14 +192,14 @@ app.get("/login", (req, res) => {
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
   const finduser = getUserByEmail(email, users);
-  const hashedPassword = finduser.password;
-  const isPasswordCorrect = bcrypt.compareSync(password, hashedPassword);
   if (!finduser) {
-    return res.status(403).send("There no user with that email");
+    return res.status(403).send("username and password is incorrect");
 
   }
+  const hashedPassword = finduser.password;
+  const isPasswordCorrect = bcrypt.compareSync(password, hashedPassword);
   if (!isPasswordCorrect) {
-    return res.status(403).send("password is incorrect");
+    return res.status(403).send("username and password is incorrect");
   }
 
   req.session.user_id = finduser.id;
