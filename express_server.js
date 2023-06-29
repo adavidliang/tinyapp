@@ -54,18 +54,12 @@ const urlDatabase = {
     longURL: "https://www.google.ca",
     userID: "aJ48lW",
   },
-  // "b2xVn2": "http://www.lighthouselabs.ca",
-  // "9sm5xK": "http://www.google.com"
 };
 
 
-app.get("/", (req, res) => {
-  res.send("Hello!");
-});
-
 app.get("/urls", (req, res) => {
   if (!isLogin(req)) {
-    return res.redirect("/login");
+    return res.send('<a href="/login">please click here to login</a>');
   }
   const userId = req.session.user_id;
   const userURLs = urlsForUser(userId);
@@ -245,10 +239,9 @@ app.post("/register", (req, res) => {
   }
   users[urlID] = newuser;
   console.log(users);
+  req.session.user_id = urlID;
   res.redirect("/urls");
 });
-
-// console.log(users);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
